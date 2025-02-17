@@ -10,7 +10,7 @@ export function SimpleStateDemo() {
         <li>No top-level component that re-renders with each change</li>
         <li>Selectors allow a component to subscribe to a piece of the global state, only re-rendering when their "slice" changes</li>
         <li>Components that need state are the only bits that re-render on change</li>
-        <li>Current values can be accessed by calling getSnapshot directly on the store, great for event handlers</li>
+        <li>Current values can be accessed by calling <code>get</code> directly on the store, great for event handlers</li>
       </ul>
       <div className={'grid grid-cols-3 max-w-lg'}>
         <Counter1Container/>

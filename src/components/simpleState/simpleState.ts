@@ -8,6 +8,6 @@ type UpdateStateFn<State> = (state: Partial<State>) => void
 
 export type Store<State> = {
   subscribe: SubscriberFn<State>
-  getSnapshot: GetSnapshotFn<State>
-  updateState: UpdateStateFn<State>
+  get: GetSnapshotFn<State>
+  set: UpdateStateFn<State>
 }

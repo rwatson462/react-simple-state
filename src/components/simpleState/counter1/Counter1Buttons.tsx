@@ -3,13 +3,13 @@ import {counterStore} from "../counterStore.ts";
 
 export function Counter1Buttons() {
   function increment() {
-    const { counter1: prevValue } = counterStore.getSnapshot()
-    counterStore.updateState({counter1: prevValue + 1})
+    const store = counterStore.get()
+    counterStore.set({counter1: store.counter1 + 1})
   }
 
   function decrement() {
-    const { counter1: prevValue } = counterStore.getSnapshot()
-    counterStore.updateState({counter1: prevValue - 1})
+    const store = counterStore.get()
+    counterStore.set({counter1: store.counter1 - 1})
   }
 
   return (

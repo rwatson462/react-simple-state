@@ -24,7 +24,7 @@ export function createStore<State>(state: State): Store<State> {
 
   return {
     subscribe,
-    getSnapshot,
-    updateState,
+    get: getSnapshot,
+    set: updateState,
   }
 }
