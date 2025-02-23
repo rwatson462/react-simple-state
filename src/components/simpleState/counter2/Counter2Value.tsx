@@ -1,4 +1,4 @@
-import {useStore} from "../useStore.ts";
+import {useStore} from "../../../lib/simple-state/useStore.ts";
 import {counterStore} from "../counterStore.ts";
 
 export function Counter2Value() {
