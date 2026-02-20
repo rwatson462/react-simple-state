@@ -1,15 +1,6 @@
-# Simple state
+# zeno-state
 
-A (hopefully) simple global state management system.
-
-## Demo (this repository)
-
-1. Download the code (`git checkout`, or some other way of downloading)
-2. Run `pnpm install`
-3. Run `pnpm run dev`
-4. Open your browser at the location given by pnpm (usually http://localhost:5173)
-5. Open your browser dev tools and enable the React dev tools feature of "Highlight updates when components render."
-6. Have a play and watch how the different start management types handle their rendering
+A simple global state management library for React. Built on React's `useSyncExternalStore`, zeno-state provides a lightweight solution for managing global state with fine-grained re-rendering control through selector functions.
 
 ## Installation
 
@@ -17,13 +8,11 @@ A (hopefully) simple global state management system.
 npm install zeno-state
 ```
 
-## Library usage
+## Usage
 
+### 1. Create a store
 
-### Step 1: Define a store
-
-I recommend setting a default value that contains all your keys alongside specifying the shape of the data to help
-reduce null value exceptions and to help define the shape of objects contained within empty arrays
+Define your store with an initial state. It's recommended to include all keys in the initial state to help with type inference and avoid null values.
 
 
 ```tsx
@@ -40,10 +29,9 @@ const carStore = createStore<{
 ```
 
 
-### Step 2: Use it
+### 2. Use the store in components
 
-The second argument of `useStore` is a _selector function_.  This allows a portion of the whole state to be used by your
-component and enables re-rendering only when that selection changes.
+The `useStore` hook takes two arguments: the store and a selector function. The selector function allows you to subscribe to specific parts of the state, ensuring components only re-render when their selected slice changes.
 
 ```tsx
 import { useStore } from 'zeno-state'
@@ -58,17 +46,33 @@ function CarList() {
 ```
 
 
-### Step 3: Update state inside a store
+### 3. Update the store
 
-`createStore` returns `get` and `set` methods to update the state, you can use these directly and any components that
-have selected part of the state you update will be re-rendered.  The `set` function accepts an object which is merged
-with the current state object, allowing additions and partial updates to the state.
+The `createStore` function returns `get` and `set` methods. Use `set` to update the state - it accepts a partial state object that gets shallow-merged with the current state. Any components subscribed to the updated slice will automatically re-render.
 
-> Note: this only allows for updating and adding keys to the stored state, not deleting any root-level keys not directly
-> updating deep-nested properties.
+**Note:** The `set` method uses shallow merging, so nested objects need to be explicitly spread for updates.
 
 ```tsx
 function addCar() {
-  carStore.set({ cars: [...cars, { make: 'Ford', model: 'Focus', engineSize: 1.6, colour: 'silver'}]})
+  const currentCars = carStore.get().cars
+  carStore.set({
+    cars: [...currentCars, {
+      make: 'Ford',
+      model: 'Focus',
+      engineSize: 1.6,
+      colour: 'silver'
+    }]
+  })
 }
 ```
+
+## Features
+
+- **Lightweight** - Minimal API surface with just `createStore` and `useStore`
+- **Fine-grained updates** - Selector functions ensure components only re-render when their selected state changes
+- **TypeScript support** - Full type safety with TypeScript
+- **React 18/19 compatible** - Built on React's `useSyncExternalStore` hook
+
+## License
+
+MIT
