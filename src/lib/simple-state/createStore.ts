@@ -1,4 +1,4 @@
-import {Store, SubscribeFn, UnsubscribeFn} from "./simpleState.ts";
+import {Store, SubscribeFn, UnsubscribeFn} from "./simpleState";
 
 export function createStore<State>(state: State): Store<State> {
   const subscribers = new Set<SubscribeFn<State>>()

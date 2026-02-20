@@ -11,10 +11,13 @@ A (hopefully) simple global state management system.
 5. Open your browser dev tools and enable the React dev tools feature of "Highlight updates when components render."
 6. Have a play and watch how the different start management types handle their rendering
 
-## Library usage
+## Installation
 
-I hope to package this up one day into my own npm package, so hold on tight for that one.
-In the meantime, seek out `createStore.ts`, `simpleState.ts`, and `useStore.ts` files and see what they do.
+```bash
+npm install simple-state
+```
+
+## Library usage
 
 
 ### Step 1: Define a store
@@ -24,6 +27,8 @@ reduce null value exceptions and to help define the shape of objects contained w
 
 
 ```tsx
+import { createStore } from 'simple-state'
+
 const carStore = createStore<{
   cars: [{
       make: 'Ford'|'Jaguar',
@@ -41,9 +46,11 @@ The second argument of `useStore` is a _selector function_.  This allows a porti
 component and enables re-rendering only when that selection changes.
 
 ```tsx
+import { useStore } from 'simple-state'
+
 function CarList() {
   const cars = useStore(carStore, state => state.cars)
-  
+
   return cars.map((car, index) => (
     <p>{ car.make } - { car.model }</p>
   ))
