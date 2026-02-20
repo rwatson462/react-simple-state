@@ -14,7 +14,7 @@ A (hopefully) simple global state management system.
 ## Installation
 
 ```bash
-npm install simple-state
+npm install zeno-state
 ```
 
 ## Library usage
@@ -27,7 +27,7 @@ reduce null value exceptions and to help define the shape of objects contained w
 
 
 ```tsx
-import { createStore } from 'simple-state'
+import { createStore } from 'zeno-state'
 
 const carStore = createStore<{
   cars: [{
@@ -46,7 +46,7 @@ The second argument of `useStore` is a _selector function_.  This allows a porti
 component and enables re-rendering only when that selection changes.
 
 ```tsx
-import { useStore } from 'simple-state'
+import { useStore } from 'zeno-state'
 
 function CarList() {
   const cars = useStore(carStore, state => state.cars)
