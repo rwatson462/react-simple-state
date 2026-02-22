@@ -74,3 +74,8 @@ Components use stores via `useStore(store, selector)` where the selector functio
 - Selector functions in `useStore` determine re-render granularity - components only re-render when their selected slice changes
 - All `.ts` and `.tsx` files use `.ts` extensions in imports (ESM style)
 - The demo app is deliberately simple to focus on showcasing render behavior differences between state management approaches
+
+## Development Workflow
+
+- Work directly on the main branch in the current directory (no git worktrees)
+- Commit changes directly to main
